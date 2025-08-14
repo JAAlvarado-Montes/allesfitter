@@ -30,8 +30,19 @@ import warnings
 from astropy.time import Time
 #import pickle
 from tqdm import tqdm
-warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning) 
-warnings.filterwarnings('ignore', category=np.RankWarning) 
+try:
+    from numpy import VisibleDeprecationWarning
+    warnings.filterwarnings('ignore', category=VisibleDeprecationWarning)
+except ImportError:
+    # fallback for NumPy >= 1.24
+    warnings.filterwarnings('ignore', message="Creating an ndarray from ragged nested sequences")
+
+try:
+    from numpy import RankWarning
+    warnings.filterwarnings('ignore', category=RankWarning)
+except ImportError:
+    # fallback for NumPy >= 1.24
+    warnings.filterwarnings('ignore', message="Creating an ndarray from ragged nested sequences")
 
 #::: allesfitter modules
 from . import config

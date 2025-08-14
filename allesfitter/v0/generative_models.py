@@ -268,7 +268,7 @@ def make_lc_model(time,
         ax.text(0,0.05,'LD transf = ['+", ".join([np.format_float_positional(item,5,False) for item in ldc_transformed]) + ']', transform=ax.transAxes)
         
         if show_plot:
-            plt.show(fig)
+            plt.show()
             
         if save_plot:
             if len(os.path.dirname(fname_plot))>0 and not os.path.exists(os.path.dirname(fname_plot)): os.makedirs(os.path.dirname(fname_plot))

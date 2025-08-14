@@ -30,8 +30,20 @@ from scipy.optimize import minimize
 from scipy.interpolate import UnivariateSpline
 import numpy.polynomial.polynomial as poly
 import warnings
-warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning) 
-warnings.filterwarnings('ignore', category=np.RankWarning) 
+
+try:
+    from numpy import VisibleDeprecationWarning
+    warnings.filterwarnings('ignore', category=VisibleDeprecationWarning)
+except ImportError:
+    # fallback for NumPy >= 1.24
+    warnings.filterwarnings('ignore', message="Creating an ndarray from ragged nested sequences")
+
+try:
+    from numpy import RankWarning
+    warnings.filterwarnings('ignore', category=RankWarning)
+except ImportError:
+    # fallback for NumPy >= 1.24
+    warnings.filterwarnings('ignore', message="Creating an ndarray from ragged nested sequences")
 warnings.filterwarnings('ignore', category=RuntimeWarning) 
 
 #::: for now, only use the original celerite
